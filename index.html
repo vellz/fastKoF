@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>情绪发泄小游戏</title>
+  <meta name="description" content="一个有趣的发泄情绪H5小游戏" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+</head>
+<body>
+  <div id="app">
+    <div class="game-container">
+      <header class="game-header">
+        <h1>情绪发泄小游戏</h1>
+        <div class="game-stats">
+          <span class="click-counter">点击次数: <span id="clickCount">0</span></span>
+          <div class="status-indicator" id="statusIndicator">
+            <span class="status-text" id="statusText">等待上传照片</span>
+          </div>
+        </div>
+      </header>
+      
+      <main class="game-main">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-content">
+            <div class="upload-icon">📷</div>
+            <p>点击上传照片</p>
+            <p class="upload-hint">支持 JPG、PNG、WEBP 格式，最大 5MB</p>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+        </div>
+        
+        <div class="game-area" id="gameArea" style="display: none;">
+          <canvas id="gameCanvas"></canvas>
+          
+          <!-- 漂浮名字显示 -->
+          <div class="floating-name" id="floatingName" style="display: none;"></div>
+          
+          <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>正在生成变形效果...</p>
+          </div>
+          
+          <!-- 变身提示 -->
+          <div class="transform-notification" id="transformNotification" style="display: none;">
+            <div class="transform-content">
+              <div class="transform-icon">🐱</div>
+              <p>恭喜！角色变身为可爱宠物！</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 名字输入框 -->
+        <div class="name-input-section" id="nameInputSection" style="display: none;">
+          <input type="text" id="nameInput" class="name-input" placeholder="输入图片人物的名字" maxlength="10" />
+        </div>
+        
+        <!-- 点击修改按钮 -->
+        <div class="modify-section" id="modifySection" style="display: none;">
+          <button class="modify-btn" id="modifyBtn">点击修改</button>
+        </div>
+      </main>
+      
+      <!-- 游戏操作按钮 - 放在照片框下方 -->
+      <div class="game-actions" id="gameActions" style="display: none;">
+        <div class="action-buttons">
+          <button class="action-btn share-btn" id="shareBtn">
+            <span class="btn-icon">📤</span>
+            <span class="btn-text">分享战绩</span>
+          </button>
+          <button class="action-btn transform-btn" id="transformBtn">
+            <span class="btn-icon">🐾</span>
+            <span class="btn-text">变身宠物</span>
+          </button>
+          <button class="action-btn reset-btn" id="resetGameBtn">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">重置游戏</span>
+          </button>
+        </div>
+      </div>
+      
+      <footer class="game-footer">
+        <div class="settings-controls">
+          <button id="volumeBtn" class="control-btn">🔊</button>
+          <button id="settingsBtn" class="control-btn">⚙️</button>
+        </div>
+      </footer>
+    </div>
+    
+    <!-- 分享战绩弹窗 -->
+    <div class="share-modal" id="shareModal" style="display: none;">
+      <div class="modal-content">
+        <h3>分享战绩</h3>
+        <div class="score-summary">
+          <div class="score-item">
+            <span class="score-label">总点击次数:</span>
+            <span class="score-value" id="shareClickCount">0</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">游戏时长:</span>
+            <span class="score-value" id="shareGameTime">0分0秒</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">变身状态:</span>
+            <span class="score-value" id="shareTransformStatus">未变身</span>
+          </div>
+        </div>
+        <div class="share-buttons">
+          <button class="share-platform-btn" id="shareToWechat">微信分享</button>
+          <button class="share-platform-btn" id="shareToWeibo">微博分享</button>
+          <button class="share-platform-btn" id="copyShareLink">复制链接</button>
+        </div>
+        <button id="closeShareModal" class="close-btn">关闭</button>
+      </div>
+    </div>
+    
+    <div class="settings-modal" id="settingsModal" style="display: none;">
+      <div class="modal-content">
+        <h3>设置</h3>
+        <div class="setting-item">
+          <label>音量: <span id="volumeValue">50</span>%</label>
+          <input type="range" id="volumeSlider" min="0" max="100" value="50" />
+        </div>
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="effectsToggle" checked />
+            启用视觉特效
+          </label>
+        </div>
+        <button id="closeSettings" class="close-btn">关闭</button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

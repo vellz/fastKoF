@@ -1,0 +1,52 @@
+# ----------------------------------------------------
+# 1. 依赖目录 (Dependencies)
+# ----------------------------------------------------
+# 忽略项目依赖目录，这些文件可以通过 package.json 恢复
+node_modules/
+/pnpm-lock.yaml  # 如果使用 pnpm
+
+# ----------------------------------------------------
+# 2. 编译/构建输出 (Build Artifacts)
+# ----------------------------------------------------
+# 忽略 TypeScript/Webpack/Vite/Rollup 等工具生成的输出目录
+# Krio 项目中常见的输出目录可能是 'dist' 或 'build'
+/dist
+/build
+/out
+/es
+/lib
+
+# ----------------------------------------------------
+# 3. 操作系统和编辑器的特定文件 (OS and Editor Files)
+# ----------------------------------------------------
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/*
+!/.vscode/settings.json # 除非特殊配置，否则建议忽略所有编辑器配置
+
+# JetBrains IDEs (WebStorm/IntelliJ)
+.idea/
+
+# ----------------------------------------------------
+# 4. 敏感信息或本地配置 (Sensitive or Local Config)
+# ----------------------------------------------------
+# 忽略本地环境变量文件
+.env
+.env.local
+.env.*.local
+/config/local.ts # 示例：本地配置
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 其他工具的缓存
+/coverage
+.nyc_output/
